@@ -59,3 +59,4 @@ public class ContratServiceImpl implements IContratService {
         contratRepository.deleteById(id);
     }
 }
+

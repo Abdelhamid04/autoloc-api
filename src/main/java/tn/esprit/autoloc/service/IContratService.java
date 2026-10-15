@@ -10,3 +10,4 @@ public interface IContratService {
     Contrat update(Long id, Contrat contrat);
     void deleteById(Long id);
 }
+
