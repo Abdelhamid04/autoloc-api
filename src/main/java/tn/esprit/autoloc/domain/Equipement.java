@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "equipement")
@@ -23,6 +24,7 @@ public class Equipement {
     @Column(nullable = false, length = 50)
     private String libelle;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "equipements")
     private List<Vehicule> vehicules = new ArrayList<>();
 }

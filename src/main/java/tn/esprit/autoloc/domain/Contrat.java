@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "contrat")
@@ -38,9 +41,11 @@ public class Contrat {
     @Column(nullable = false)
     private boolean valide;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "contrat")
     private Reservation reservation;
 
-    @OneToMany(mappedBy = "contrat")
+    @JsonManagedReference("contrat-paiements")
+    @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Paiement> paiements = new ArrayList<>();
 }

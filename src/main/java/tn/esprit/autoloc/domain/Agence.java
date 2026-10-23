@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "agence")
 @Getter
@@ -30,9 +31,11 @@ public class Agence {
     @Column(nullable = false, length = 20)
     private String telephone;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "agence")
     private List<Employe> employes = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "agence")
     private List<Vehicule> vehicules = new ArrayList<>();
 }

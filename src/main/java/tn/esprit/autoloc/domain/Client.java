@@ -8,6 +8,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "client")
@@ -39,6 +40,7 @@ public class Client {
     @Column(nullable = false)
     private LocalDate dateInscription;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Reservation> reservations = new ArrayList<>();
 }

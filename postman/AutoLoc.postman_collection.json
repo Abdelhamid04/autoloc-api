@@ -1,0 +1,517 @@
+﻿{
+    "info":  {
+                 "_postman_id":  "autoloc-api-atelier-5",
+                 "name":  "AutoLoc",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+             },
+    "variable":  [
+                     {
+                         "key":  "contratId",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "paiementId",
+                         "value":  ""
+                     }
+                 ],
+    "item":  [
+                 {
+                     "name":  "Agences",
+                     "item":  [
+                                  {
+                                      "name":  "Lister",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/agences"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Détail absent (404)",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/agences/999999"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027404 Not Found\u0027, () =\u003e pm.response.to.have.status(404));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Créer",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\"nom\":\"Agence Centre\",\"ville\":\"Tunis\",\"adresse\":\"Avenue Habib Bourguiba\",\"telephone\":\"71000000\"}"
+                                                               },
+                                                      "url":  "{{baseUrl}}/agences"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027201 Created\u0027, () =\u003e pm.response.to.have.status(201));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Employés",
+                     "item":  [
+                                  {
+                                      "name":  "Lister",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/employes"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Détail absent (404)",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/employes/999999"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027404 Not Found\u0027, () =\u003e pm.response.to.have.status(404));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Véhicules",
+                     "item":  [
+                                  {
+                                      "name":  "Lister",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/vehicules"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Détail absent (404)",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/vehicules/999999"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027404 Not Found\u0027, () =\u003e pm.response.to.have.status(404));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Équipements",
+                     "item":  [
+                                  {
+                                      "name":  "Lister",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/equipements"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Créer vide (400)",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\"libelle\":\" \"}"
+                                                               },
+                                                      "url":  "{{baseUrl}}/equipements"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027400 Bad Request\u0027, () =\u003e pm.response.to.have.status(400));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Clients",
+                     "item":  [
+                                  {
+                                      "name":  "Lister",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/clients"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Créer",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\"nom\":\"Ben Ali\",\"prenom\":\"Amira\",\"email\":\"amira@example.test\",\"telephone\":\"22000000\",\"numPermis\":\"TN-123456\",\"dateInscription\":\"2026-01-15\"}"
+                                                               },
+                                                      "url":  "{{baseUrl}}/clients"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027201 Created\u0027, () =\u003e pm.response.to.have.status(201));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Réservations",
+                     "item":  [
+                                  {
+                                      "name":  "Lister",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/reservations"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Détail absent (404)",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/reservations/999999"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027404 Not Found\u0027, () =\u003e pm.response.to.have.status(404));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Contrat et paiements - cascade",
+                     "item":  [
+                                  {
+                                      "name":  "1. Créer contrat avec deux paiements",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\"dateSignature\":\"2026-01-10\",\"montantTotal\":500.00,\"valide\":true,\"paiements\":[{\"montant\":250.00,\"datePaiement\":\"2026-01-10\",\"modePaiement\":\"CARTE\"},{\"montant\":250.00,\"datePaiement\":\"2026-01-11\",\"modePaiement\":\"VIREMENT\"}]}"
+                                                               },
+                                                      "url":  "{{baseUrl}}/contrats"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027201 Created\u0027, () =\u003e pm.response.to.have.status(201));",
+                                                                                    "const body = pm.response.json();",
+                                                                                    "pm.environment.set(\u0027contratId\u0027, body.idContrat);"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "2. Lister paiements persistés",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/paiements"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027200 OK et paiements présents\u0027, () =\u003e { pm.response.to.have.status(200); const payments = pm.response.json(); pm.expect(payments.filter(p =\u003e p.contrat \u0026\u0026 p.contrat.idContrat == pm.environment.get(\u0027contratId\u0027)).length).to.be.greaterThan(0); });"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "3. Modifier contrat, garder paiements",
+                                      "request":  {
+                                                      "method":  "PUT",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\"dateSignature\":\"2026-01-10\",\"montantTotal\":510.00,\"valide\":true}"
+                                                               },
+                                                      "url":  "{{baseUrl}}/contrats/{{contratId}}"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "4. Supprimer contrat",
+                                      "request":  {
+                                                      "method":  "DELETE",
+                                                      "url":  "{{baseUrl}}/contrats/{{contratId}}"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027204 No Content\u0027, () =\u003e pm.response.to.have.status(204));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "5. Contrat supprimé (404)",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/contrats/{{contratId}}"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027404 Not Found\u0027, () =\u003e pm.response.to.have.status(404));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "6. POST paiements interdit (405)",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{}"
+                                                               },
+                                                      "url":  "{{baseUrl}}/paiements"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027405 Method Not Allowed\u0027, () =\u003e pm.response.to.have.status(405));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Paiements",
+                     "item":  [
+                                  {
+                                      "name":  "Lister",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/paiements"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Détail absent (404)",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/paiements/999999"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027404 Not Found\u0027, () =\u003e pm.response.to.have.status(404));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Maintenances",
+                     "item":  [
+                                  {
+                                      "name":  "Lister",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/maintenances"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Détail absent (404)",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{baseUrl}}/maintenances/999999"
+                                                  },
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027404 Not Found\u0027, () =\u003e pm.response.to.have.status(404));"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ]
+                                  }
+                              ]
+                 }
+             ]
+}

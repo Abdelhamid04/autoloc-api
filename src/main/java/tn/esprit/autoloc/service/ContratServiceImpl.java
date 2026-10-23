@@ -22,6 +22,9 @@ public class ContratServiceImpl implements IContratService {
         if (contrat.getMontantTotal() != null && contrat.getMontantTotal().compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Le montant total ne peut pas être négatif");
         }
+        if (contrat.getPaiements() != null) {
+            contrat.getPaiements().forEach(paiement -> paiement.setContrat(contrat));
+        }
         return contratRepository.save(contrat);
     }
 
@@ -47,6 +50,12 @@ public class ContratServiceImpl implements IContratService {
         existant.setDateSignature(contrat.getDateSignature());
         existant.setMontantTotal(contrat.getMontantTotal());
         existant.setValide(contrat.isValide());
+        if (contrat.getPaiements() != null) {
+            List<tn.esprit.autoloc.domain.Paiement> paiementsRecus = new java.util.ArrayList<>(contrat.getPaiements());
+            paiementsRecus.forEach(paiement -> paiement.setContrat(existant));
+            existant.getPaiements().clear();
+            existant.getPaiements().addAll(paiementsRecus);
+        }
         
         return contratRepository.save(existant);
     }

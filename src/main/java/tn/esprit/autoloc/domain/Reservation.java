@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "reservation")
@@ -38,6 +39,7 @@ public class Reservation {
     @JoinColumn(name = "vehicule_id")
     private Vehicule vehicule;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "contrat_id")
     private Contrat contrat;
