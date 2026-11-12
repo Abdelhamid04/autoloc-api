@@ -12,6 +12,26 @@
                      {
                          "key":  "paiementId",
                          "value":  ""
+                     },
+                     {
+                         "key":  "employeId",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "agenceId",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "vehiculeId",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "equipementId",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "agenceSfaxId",
+                         "value":  ""
                      }
                  ],
     "item":  [
@@ -117,6 +137,42 @@
                                                                    }
                                                     }
                                                 ]
+                                  },
+                                  {
+                                      "name":  "Désaffecter de l'agence",
+                                      "description":  "Étape 1 du transfert RH : désaffecter l'employé avant de l'affecter à l'agence de Tunis.",
+                                      "request":  {
+                                                  "method":  "DELETE",
+                                                  "url":  "{{baseUrl}}/employes/{{employeId}}/agence"
+                                                  },
+                                      "event":  [
+                                                {
+                                                    "listen":  "test",
+                                                    "script":  {
+                                                                   "exec":  [
+                                                                                "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                            ]
+                                                               }
+                                                }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Affecter à une agence",
+                                      "description":  "Étape 2 du transfert RH : affecter l'employé désaffecté à l'agence de Tunis (agenceId).",
+                                      "request":  {
+                                                  "method":  "PUT",
+                                                  "url":  "{{baseUrl}}/employes/{{employeId}}/agence/{{agenceId}}"
+                                                  },
+                                      "event":  [
+                                                {
+                                                    "listen":  "test",
+                                                    "script":  {
+                                                                   "exec":  [
+                                                                                "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                            ]
+                                                               }
+                                                }
+                                                ]
                                   }
                               ]
                  },
@@ -155,6 +211,60 @@
                                                                                 ]
                                                                    }
                                                     }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Affecter à une agence",
+                                      "description":  "Rattacher le véhicule à l'agence de Sfax (agenceSfaxId). L'ID doit correspondre à une agence de Sfax existante.",
+                                      "request":  {
+                                                  "method":  "PUT",
+                                                  "url":  "{{baseUrl}}/vehicules/{{vehiculeId}}/agence/{{agenceSfaxId}}"
+                                                  },
+                                      "event":  [
+                                                {
+                                                    "listen":  "test",
+                                                    "script":  {
+                                                                   "exec":  [
+                                                                                "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                            ]
+                                                               }
+                                                }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Affecter un équipement",
+                                      "description":  "Installer l'équipement demandé sur le véhicule.",
+                                      "request":  {
+                                                  "method":  "PUT",
+                                                  "url":  "{{baseUrl}}/vehicules/{{vehiculeId}}/equipements/{{equipementId}}"
+                                                  },
+                                      "event":  [
+                                                {
+                                                    "listen":  "test",
+                                                    "script":  {
+                                                                   "exec":  [
+                                                                                "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                            ]
+                                                               }
+                                                }
+                                                ]
+                                  },
+                                  {
+                                      "name":  "Désaffecter un équipement",
+                                      "description":  "Retirer du véhicule l'équipement précédemment installé.",
+                                      "request":  {
+                                                  "method":  "DELETE",
+                                                  "url":  "{{baseUrl}}/vehicules/{{vehiculeId}}/equipements/{{equipementId}}"
+                                                  },
+                                      "event":  [
+                                                {
+                                                    "listen":  "test",
+                                                    "script":  {
+                                                                   "exec":  [
+                                                                                "pm.test(\u0027200 OK\u0027, () =\u003e pm.response.to.have.status(200));"
+                                                                            ]
+                                                               }
+                                                }
                                                 ]
                                   }
                               ]

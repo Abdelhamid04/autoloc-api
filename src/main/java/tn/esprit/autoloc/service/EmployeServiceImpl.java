@@ -3,8 +3,10 @@ package tn.esprit.autoloc.service;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.autoloc.domain.Agence;
 import tn.esprit.autoloc.domain.Employe;
 import tn.esprit.autoloc.exception.ResourceNotFoundException;
+import tn.esprit.autoloc.repository.IAgenceRepository;
 import tn.esprit.autoloc.repository.IEmployeRepository;
 
 @Service
@@ -12,6 +14,7 @@ import tn.esprit.autoloc.repository.IEmployeRepository;
 public class EmployeServiceImpl implements IEmployeService {
 
     private final IEmployeRepository employeRepository;
+    private final IAgenceRepository agenceRepository;
 
     @Override
     public Employe create(Employe employe) {
@@ -41,9 +44,28 @@ public class EmployeServiceImpl implements IEmployeService {
         existant.setNom(employe.getNom());
         existant.setPrenom(employe.getPrenom());
         existant.setRole(employe.getRole());
-        existant.setAgence(employe.getAgence());
 
         return employeRepository.save(existant);
+    }
+
+    @Override
+    public Employe desaffecterEmploye(Long idEmploye) {
+        Employe employe = findById(idEmploye);
+        employe.setAgence(null);
+        return employeRepository.save(employe);
+    }
+
+    @Override
+    public Employe affecterEmploye(Long idEmploye, Long idAgence) {
+        Employe employe = findById(idEmploye);
+        if (employe.getAgence() != null
+                && !employe.getAgence().getIdAgence().equals(idAgence)) {
+            throw new IllegalArgumentException("L'employé doit être désaffecté avant d'être affecté à une autre agence");
+        }
+        Agence agence = agenceRepository.findById(idAgence)
+                .orElseThrow(() -> new ResourceNotFoundException("Agence", idAgence));
+        employe.setAgence(agence);
+        return employeRepository.save(employe);
     }
 
     @Override
